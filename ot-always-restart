@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+require File.join(File.dirname(__FILE__),'ot-config.rb')
+
+DEVELOPMENT_DIRS.each do |name,dir|
+	unless dir.to_s.match(/test|opentox-ruby-api-wrapper/)
+		tmp = dir['/tmp/']
+		puts tmp
+		print tmp.bash "touch always_restart.txt"
+	end
+end
+

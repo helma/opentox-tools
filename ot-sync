@@ -1,0 +1,20 @@
+#!//bin/sh
+
+server=$1
+
+# backup local machine
+# TODO
+
+# /usr/local compiled programs and libraries
+rsync -avz --delete $server:/usr/local/ /usr/local
+
+# /opt for ruby (including gems) and nginx
+rsync -avz --delete --exclude="*.log" $server:/opt/ /opt/
+
+# synchronize apt-packages
+packages=/tmp/`date`-dpkg.list
+ssh $server "dpkg --get-selection > $packages"
+rsync -vz $server:$packages $packages
+dpgk --clear-selection
+dpkg --set-selection < $packages
+apt-get dselect-upgrade`

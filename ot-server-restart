@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require File.join(File.dirname(__FILE__),'ot-config.rb')
+
+# univac
+SERVER_DIRS.each do |name,dir|
+	# pull test
+	puts dir
+	print dir.bash "touch tmp/restart.txt" unless name == :gem 
+end
+# run remote tests

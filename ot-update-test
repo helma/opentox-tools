@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# from development to test
+# development server
+
+ot-git checkout test
+ot-git merge development
+ot-git push
+ot-git checkout development
+
+# test server
+
+ssh -p 107 ot-test.in-silico.ch "sudo `which gem` update opentox-ruby-api-wrapper --no-rdoc --no-ri"
+ssh -p 107 ot-test.in-silico.ch "/home/ch/bin/ot-git pull"
+ssh -p 107 ot-test.in-silico.ch "/home/ch/bin/nginx-stop"
+ssh -p 107 ot-test.in-silico.ch "/home/ch/bin/nginx-start"

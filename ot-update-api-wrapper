@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# update api wrapper
+cd /var/www/opentox/opentox-ruby-api-wrapper
+#rake version:bump:patch
+#rake gemcutter:release
+version=`cat VERSION`
+rake build
+sudo `which gem` install ./pkg/opentox-ruby-api-wrapper-$version
+cd /var/www/opentox
+
+# set version numbers in all application.rb's
+#for file in */application.rb 
+#do
+#	sed -i "s/gem \"opentox-ruby-api-wrapper\",.*/gem \"opentox-ruby-api-wrapper\", \"= $version\"/" $file
+#done
+
+#ot-git-commit "opentox-api-wrapper bumped to "$version
+#ot-git push
+#sudo `which gem` update opentox-ruby-api-wrapper
+cd /opt/ruby-enterprise-1.8.7-2010.01/lib/ruby/gems/1.8/gems/opentox-ruby-api-wrapper-$version
+sudo mv lib lib~
+sudo ln -s /var/www/opentox/opentox-ruby-api-wrapper/lib/ ./
+cd /var/www/opentox

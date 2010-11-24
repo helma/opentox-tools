@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+require File.join(File.dirname(__FILE__),'ot-config.rb')
+
+# patched : git returns exit 1, bash exects 0 
+class Rush::Dir
+	def git(command, options={})
+		`cd #{full_path} && git #{command}`
+	end
+end
+
+DEVELOPMENT_DIRS.each do |name,dir|
+	print dir.git("commit -am '#{ARGV[0]}'")
+end

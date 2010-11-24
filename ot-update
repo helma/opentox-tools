@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require File.join(File.dirname(__FILE__),'ot-config.rb')
+
+# local
+# run local tests
+DEVELOPMENT_DIRS.each do |name,dir|
+	puts dir
+	print dir.git("checkout test")
+	print dir.git("pull origin test")
+	print dir.git("checkout development")
+	print dir.git("merge test")
+end
