@@ -10,5 +10,5 @@ DEVELOPMENT_DIRS = {
 	:model => DEVELOPMENT["/var/www/opentox/model/"],
 	:task => DEVELOPMENT["/var/www/opentox/task/"],
 	:toxcreate => DEVELOPMENT["/var/www/opentox/toxcreate/"],
-	:gem => DEVELOPMENT["/var/www/opentox/opentox-ruby-api-wrapper/"]
+	:gem => DEVELOPMENT["/var/www/opentox/opentox-ruby/"]
 }
